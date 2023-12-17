@@ -110,7 +110,7 @@ class UserInterface:
             self.cards.append(Card(self.cards_name[i], self.x0 + self.dis * i, self.y0))
 
     def game_init(self, test=False, state=None):
-        if self.state == 3:
+        if self.state >= 3:
             return
         if state is not None:
             self.state = state
@@ -213,14 +213,14 @@ class UserInterface:
             if self.next_menu.collidepoint(pos):
                 sounds.click.play()
                 self.state += 1
-                # self.game_init(test=True) 测试模式，不会出现植物，且阳光是十倍
-                self.game_init()
+                self.game_init(test=True) # 测试模式，不会出现植物，且阳光是十倍
+                # self.game_init()
         if not self.start:
             if self.start_0.collidepoint(pos):
                 sounds.click.play()
                 self.start = True
-                # self.game_init(test=True, state=2) 测试模式，同上，且直接进入第三关
-                self.game_init()
+                self.game_init(test=True, state=2) # 测试模式，同上，且直接进入第三关
+                # self.game_init()
         for card in self.cards:
             if card.card.collidepoint(pos) and not card.is_black:
                 self.on_zombie = True
